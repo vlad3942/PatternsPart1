@@ -4,17 +4,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Singleton {
+public final class Singleton {
 
-    private static Properties properties;
+    private static volatile Properties properties;
 
-    public static synchronized Properties getProperties() {
+    public static Properties getProperties() {
         if (properties == null) {
-            properties = new Properties();
-            try (FileInputStream in = new FileInputStream("application.properties")) {
-                properties.load(in);
-            } catch (IOException e) {
-                throw new IllegalStateException(e);
+            synchronized (Singleton.class) {
+                if (properties == null) {
+                    properties = new Properties();
+                    try (FileInputStream in = new FileInputStream("application.properties")) {
+                        properties.load(in);
+                    } catch (IOException e) {
+                        throw new IllegalStateException(e);
+                    }
+                }
             }
         }
         return properties;
