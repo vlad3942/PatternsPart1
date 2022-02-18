@@ -4,15 +4,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public final class Singleton {
+public final class SingletonProperties extends Properties {
 
-    private static volatile Properties properties;
+    private static volatile SingletonProperties properties;
 
-    public static Properties getProperties() {
+    private SingletonProperties() {
+        super();
+    }
+
+    public static SingletonProperties getProperties() {
         if (properties == null) {
-            synchronized (Singleton.class) {
+            synchronized (SingletonProperties.class) {
                 if (properties == null) {
-                    properties = new Properties();
+                    properties = new SingletonProperties();
                     try (FileInputStream in = new FileInputStream("application.properties")) {
                         properties.load(in);
                     } catch (IOException e) {

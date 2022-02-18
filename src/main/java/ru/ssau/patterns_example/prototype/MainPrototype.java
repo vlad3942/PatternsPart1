@@ -20,6 +20,10 @@ public class MainPrototype {
             Auto autoClone = (Auto) auto.clone();
             System.out.println("Clone:");
             System.out.println(autoClone);
+            //test
+            if (auto.equals(autoClone)) {
+                System.out.println("Clone is uniq object.");
+            }
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -40,6 +44,10 @@ public class MainPrototype {
             Moto motoClone = (Moto) moto.clone();
             System.out.println("Clone:");
             System.out.println(motoClone);
+            //test
+            if (moto.equals(motoClone)) {
+                System.out.println("Clone is uniq object.");
+            }
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
